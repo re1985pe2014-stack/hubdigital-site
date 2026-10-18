@@ -3,183 +3,356 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hub Digital | Soluções práticas</title>
-<meta name="description" content="Ferramentas plug & play para sua rotina e suas finanças.">
-<meta property="og:title" content="Hub Digital | Soluções práticas">
-<meta property="og:description" content="Ferramentas plug & play para sua rotina e suas finanças.">
+<title>Painel Anti-Fatura | Hub Digital</title>
+<meta name="description" content="Pergunte ao painel antes de passar o cartão. Veja na hora se a compra cabe na fatura: pode, aperta ou estoura. R$ 19,90, pagamento único.">
+<meta property="og:title" content="Painel Anti-Fatura | Hub Digital">
+<meta property="og:description" content="Veja na hora se a compra cabe na fatura antes de passar o cartão.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <script>
-/* ============================================================
-   EDITE SÓ ESTE BLOCO.
-
-   Para adicionar um produto novo depois, copie um trecho entre
-   { } , cole abaixo e troque os textos. Nada mais muda — o link
-   da sua bio no Instagram continua o mesmo pra sempre.
-
-   status: "disponivel" | "breve"
-   ============================================================ */
-
-const PRODUTOS = [
-  {
-    nome: "Painel Anti-Fatura",
-    linha: "Pergunte ao painel antes de passar o cartão. Teto por fatura, parcelas e previsão de estouro.",
-    preco: "R$ 19,90",
-    link: "https://pay.kiwify.com.br/cpTGLCZ",
-    status: "disponivel"
-  },
-  {
-    nome: "Central de Foco & Produtividade",
-    linha: "Organize a semana inteira numa tela só.",
-    preco: "",
-    link: "",
-    status: "breve"
-  }
-];
-
-const CONTATO = {
-  whatsapp: "",                                   // ex.: https://wa.me/5581999999999
-  email: "contato.hubdigital@gmail.com",
-  instagram: "https://instagram.com/hubdigital.pratico"
-};
+  /* EDITE SÓ AQUI */
+  const CHECKOUT  = "https://pay.kiwify.com.br/cpTGLCZ";
+  const INSTAGRAM = "https://instagram.com/hubdigital.pratico";
+  const EMAIL     = "contato.hubdigital@gmail.com";
+  const PRECO     = "R$ 19,90";
 </script>
 
 <style>
-  :root{
-    --preto:#000;
-    --carvao:#0d0f0e;
-    --linha:#1d2220;
-    --neon:#00FF66;
-    --branco:#fff;
-    --cinza:#888;
-    --apagado:#4d524f;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    background:var(--preto);color:var(--branco);
-    font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:430px;margin:0 auto;padding:46px 22px 56px}
+:root{
+  --preto:#000;--carvao:#0d0f0e;--carvao2:#121513;--linha:#1e2320;
+  --neon:#00FF66;--branco:#fff;--cinza:#8d948f;--vermelho:#ff4d4d;--ambar:#ffb020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--preto);color:var(--branco);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:84px}
+a{color:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.neon{color:var(--neon)}
 
-  /* marca */
-  .marca{text-align:center;margin-bottom:34px}
-  .hd{font-size:54px;font-weight:700;letter-spacing:-.045em;line-height:1}
-  .hd i{font-style:normal;color:var(--neon)}
-  .marca .nome{font-size:11px;letter-spacing:.42em;color:var(--cinza);padding-left:.42em;margin-top:7px}
-  .marca .tag{font-size:15px;color:var(--cinza);margin-top:16px}
+/* fundo */
+.glow{position:absolute;inset:0 0 auto 0;height:620px;pointer-events:none;
+  background:radial-gradient(60% 55% at 50% 0%,rgba(0,255,102,.20),transparent 70%),
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/36px 36px,
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/36px 36px;
+  -webkit-mask-image:linear-gradient(#000 40%,transparent);mask-image:linear-gradient(#000 40%,transparent)}
+header{position:relative;display:flex;justify-content:space-between;align-items:center;padding:22px 0 8px}
+.logo{font-size:34px;font-weight:700;letter-spacing:-.05em;line-height:1}
+.logo i{font-style:normal;color:var(--neon)}
+.logo small{display:inline-block;font-size:10px;letter-spacing:.34em;color:var(--cinza);font-weight:500;margin-left:10px;vertical-align:middle}
+.topo-cta{font-size:13px;font-weight:700;text-decoration:none;color:#00170a;background:var(--neon);padding:9px 16px;border-radius:99px}
 
-  /* seção */
-  .titulo{
-    font-size:13px;color:var(--apagado);margin:0 0 12px 2px;
-  }
+/* hero */
+.hero{position:relative;text-align:center;padding:34px 0 10px}
+.selo{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:var(--neon);border:1px solid rgba(0,255,102,.35);background:rgba(0,255,102,.07);padding:7px 14px;border-radius:99px;margin-bottom:22px}
+.selo b{width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon);animation:pulso 1.6s infinite}
+@keyframes pulso{50%{opacity:.35}}
+h1{font-size:clamp(38px,10.5vw,58px);line-height:1.02;letter-spacing:-.04em;font-weight:700}
+h1 em{font-style:normal;color:var(--neon);text-shadow:0 0 38px rgba(0,255,102,.45)}
+.sub{color:#b9c0bb;font-size:18px;margin:20px auto 28px;max-width:440px}
+.sub b{color:#fff;font-weight:500}
 
-  /* cartões de produto */
-  a.card,div.card{
-    display:block;text-decoration:none;color:inherit;
-    background:var(--carvao);border:1px solid var(--linha);
-    border-radius:16px;padding:18px 20px;margin-bottom:12px;
-    transition:border-color .15s ease,transform .12s ease;
-  }
-  a.card:hover,a.card:focus-visible{border-color:var(--neon)}
-  a.card:active{transform:scale(.99)}
-  a.card:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
-  .card h2{font-size:17px;font-weight:700;letter-spacing:-.01em}
-  .card p{font-size:14px;color:var(--cinza);margin-top:3px}
-  .card .rodape{display:flex;align-items:center;gap:10px;margin-top:14px}
-  .preco{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--neon)}
-  .acao{margin-left:auto;font-size:13px;font-weight:700;color:var(--neon)}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:18px;border-radius:16px;padding:19px 20px;
+  background:var(--neon);color:#00170a;box-shadow:0 0 0 0 rgba(0,255,102,.5),0 12px 40px -10px rgba(0,255,102,.55);animation:onda 2.6s infinite;transition:transform .12s}
+.btn:active{transform:scale(.985)}
+.btn small{display:block;font-size:12.5px;font-weight:500;opacity:.72;margin-top:2px}
+@keyframes onda{0%{box-shadow:0 0 0 0 rgba(0,255,102,.45),0 12px 40px -10px rgba(0,255,102,.55)}70%,100%{box-shadow:0 0 0 18px rgba(0,255,102,0),0 12px 40px -10px rgba(0,255,102,.55)}}
+.pagar{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--cinza);margin-top:14px}
 
-  .card.breve{border-style:dashed;background:transparent}
-  .card.breve h2{color:var(--apagado)}
-  .card.breve p{color:var(--apagado)}
-  .selo{
-    font-family:'IBM Plex Mono',monospace;font-size:11px;
-    color:var(--apagado);border:1px solid var(--linha);
-    border-radius:99px;padding:3px 10px;
-  }
+/* demo */
+.demo{position:relative;margin:38px 0 0;background:linear-gradient(180deg,var(--carvao2),var(--carvao));border:1px solid var(--linha);border-radius:24px;padding:20px;text-align:left;box-shadow:0 30px 80px -30px rgba(0,255,102,.25)}
+.demo-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--preto);border:1px solid var(--neon);color:var(--neon);font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;white-space:nowrap}
+.fat-topo{display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px}
+.fat-topo span{font-size:12px;color:var(--cinza)}
+.fat-val{font-family:'IBM Plex Mono',monospace;font-size:34px;font-weight:600;color:var(--neon);letter-spacing:-.03em;line-height:1.1}
+.barra{height:10px;background:#191d1b;border-radius:99px;margin:12px 0 8px;overflow:hidden;position:relative}
+.barra i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;transition:width .5s cubic-bezier(.22,1,.36,1),background .3s}
+.barra i.prev{background:rgba(255,255,255,.22)}
+.fat-base{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--cinza)}
+.pergunta{margin-top:20px;padding-top:18px;border-top:1px dashed var(--linha)}
+.pergunta h3{font-size:19px;letter-spacing:-.02em}
+.pergunta p.dica{font-size:13px;color:var(--cinza);margin-bottom:12px}
+.linha-in{display:grid;grid-template-columns:1fr 112px;gap:10px}
+.campo{background:#0a0c0b;border:1px solid var(--linha);border-radius:14px;padding:10px 14px}
+.campo label{display:block;font-size:11px;color:var(--cinza)}
+.campo input,.campo select{width:100%;background:transparent;border:0;outline:0;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;padding:2px 0;appearance:none;-webkit-appearance:none}
+.campo select{font-size:17px;font-family:'Space Grotesk',sans-serif}
+.campo:focus-within{border-color:var(--neon)}
+.chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#cfd6d1;background:#0a0c0b;border:1px solid var(--linha);border-radius:99px;padding:7px 13px;cursor:pointer}
+.chip:hover{border-color:var(--neon);color:var(--neon)}
+.veredito{margin-top:14px;border-radius:16px;padding:16px;border:1px solid;transition:all .3s}
+.veredito .t{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em}
+.veredito .t b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;font-size:16px;color:#000}
+.veredito p{font-size:14px;margin-top:8px;color:#d3d9d5}
+.veredito.pode{border-color:rgba(0,255,102,.5);background:rgba(0,255,102,.07)} .veredito.pode .t{color:var(--neon)} .veredito.pode .t b{background:var(--neon)}
+.veredito.aperta{border-color:rgba(255,176,32,.5);background:rgba(255,176,32,.07)} .veredito.aperta .t{color:var(--ambar)} .veredito.aperta .t b{background:var(--ambar)}
+.veredito.estoura{border-color:rgba(255,77,77,.55);background:rgba(255,77,77,.08)} .veredito.estoura .t{color:var(--vermelho)} .veredito.estoura .t b{background:var(--vermelho)}
+.veredito.vazio{border-color:var(--linha);background:transparent}.veredito.vazio .t{color:var(--cinza)}.veredito.vazio .t b{background:#2a302c}
+.rodape-demo{font-size:11.5px;color:#5d645f;text-align:center;margin-top:12px}
 
-  /* contato */
-  .contato{margin-top:32px;border-top:1px solid var(--linha);padding-top:22px}
-  a.link{
-    display:flex;align-items:center;justify-content:space-between;
-    text-decoration:none;color:var(--cinza);font-size:15px;
-    padding:13px 2px;border-bottom:1px solid var(--linha);
-  }
-  a.link:hover,a.link:focus-visible{color:var(--neon)}
-  a.link span{color:var(--apagado);font-size:13px}
+/* seções */
+section{padding:64px 0 0}
+.kick{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--neon);font-weight:700;margin-bottom:12px}
+h2{font-size:clamp(28px,7.4vw,38px);letter-spacing:-.035em;line-height:1.08;margin-bottom:14px}
+.lead{color:#b9c0bb;font-size:17px}
+.dor{display:grid;gap:12px;margin-top:24px}
+.dor div{background:var(--carvao);border:1px solid var(--linha);border-radius:16px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start;font-size:16px}
+.dor span{font-size:22px;line-height:1.2}
+.passos{display:grid;gap:14px;margin-top:26px;counter-reset:p}
+.passo{position:relative;background:var(--carvao);border:1px solid var(--linha);border-radius:20px;padding:20px 20px 20px 74px}
+.passo:before{counter-increment:p;content:counter(p);position:absolute;left:18px;top:18px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:18px;color:#00170a;background:var(--neon)}
+.passo h3{font-size:18px;margin-bottom:3px}.passo p{font-size:15px;color:var(--cinza)}
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.rec{background:var(--carvao);border:1px solid var(--linha);border-radius:18px;padding:18px 16px}
+.rec .i{font-size:26px;margin-bottom:10px;display:block}
+.rec h3{font-size:16px;line-height:1.2;margin-bottom:5px}
+.rec p{font-size:13.5px;color:var(--cinza)}
+.rec.grande{grid-column:1/-1;border-color:rgba(0,255,102,.4);background:linear-gradient(135deg,rgba(0,255,102,.09),var(--carvao))}
+@media(max-width:380px){.grade{grid-template-columns:1fr}}
 
-  footer{margin-top:34px;text-align:center;font-size:12px;color:var(--apagado)}
+/* oferta */
+.oferta{position:relative;margin-top:30px;border-radius:26px;padding:28px 22px;text-align:center;background:linear-gradient(180deg,#0f1a13,var(--carvao));border:1px solid rgba(0,255,102,.55);box-shadow:0 0 70px -20px rgba(0,255,102,.5)}
+.oferta .nome{font-size:15px;color:var(--cinza)}
+.oferta .preco{font-family:'IBM Plex Mono',monospace;font-size:68px;font-weight:600;letter-spacing:-.05em;line-height:1.1;margin:6px 0 2px;color:var(--neon);text-shadow:0 0 40px rgba(0,255,102,.4)}
+.oferta .ps{color:#b9c0bb;font-size:14px;margin-bottom:20px}
+.inclui{list-style:none;text-align:left;margin:0 0 24px;display:grid;gap:10px}
+.inclui li{display:flex;gap:11px;font-size:15px;color:#e2e7e3}
+.inclui li:before{content:"✓";color:var(--neon);font-weight:700}
+.garantia{display:flex;gap:12px;align-items:flex-start;text-align:left;margin-top:18px;font-size:13.5px;color:var(--cinza);border-top:1px solid var(--linha);padding-top:16px}
+.garantia span{font-size:24px}
+.comparar{font-size:14px;color:var(--cinza);text-align:center;margin-top:18px}
+.comparar b{color:#fff}
 
-  @media (max-width:360px){ .wrap{padding:36px 16px 46px} .hd{font-size:46px} }
+details{border-bottom:1px solid var(--linha);padding:18px 0}
+details:first-of-type{border-top:1px solid var(--linha);margin-top:22px}
+summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:14px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--neon);font-size:22px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{color:var(--cinza);font-size:15px;margin-top:10px}
+
+.breve{margin-top:40px;border:1px dashed var(--linha);border-radius:16px;padding:16px 18px;color:var(--cinza);font-size:14px}
+.breve b{color:#cfd6d1;display:block;font-size:15px}
+footer{padding:44px 0 20px;text-align:center;font-size:13px;color:#5d645f}
+footer a{color:var(--cinza);text-decoration:none;margin:0 8px}
+
+/* barra fixa */
+.fixa{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#000 35%);transform:translateY(120%);transition:transform .35s}
+.fixa.on{transform:none}
+.fixa a{max-width:560px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;text-decoration:none;background:var(--neon);color:#00170a;font-weight:700;border-radius:16px;padding:14px 20px;font-size:16px;box-shadow:0 10px 40px -8px rgba(0,255,102,.6)}
+.fixa span{font-family:'IBM Plex Mono',monospace}
+
+.rev{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.rev.vis{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.btn,.selo b{animation:none}.rev{opacity:1;transform:none;transition:none}.barra i{transition:none}}
 </style>
 </head>
 <body>
+<div class="glow"></div>
 <div class="wrap">
 
-  <header class="marca">
-    <div class="hd">H<i>D</i></div>
-    <div class="nome">HUB DIGITAL</div>
-    <p class="tag">Ferramentas plug &amp; play para sua rotina e suas finanças.</p>
-  </header>
+<header>
+  <div class="logo">H<i>D</i><small>HUB DIGITAL</small></div>
+  <a class="topo-cta" href="#oferta">Quero o meu</a>
+</header>
 
-  <h1 class="titulo">Soluções</h1>
-  <div id="lista"></div>
+<!-- HERO -->
+<div class="hero">
+  <div class="selo"><b></b>Pagamento único · sem mensalidade</div>
+  <h1>Pare de estourar a <em>fatura</em> do cartão.</h1>
+  <p class="sub">Digite o valor da compra e o painel responde na hora: <b>pode, aperta ou estoura.</b> Antes de passar o cartão, não depois.</p>
+  <a class="btn" data-checkout href="#">Quero meu painel por <span class="pr"></span><small>Acesso por link no seu e-mail em segundos</small></a>
+  <div class="pagar"><span>Pix</span><span>Cartão</span><span>Boleto</span><span>Compra segura</span></div>
 
-  <nav class="contato" id="contato"></nav>
+  <!-- DEMO AO VIVO -->
+  <div class="demo">
+    <div class="demo-tag">▶ Teste aqui, é de verdade</div>
+    <div class="fat-topo">
+      <div><span>Disponível nesta fatura</span><div class="fat-val" id="disp">R$ 580</div></div>
+      <span id="uso" class="mono">71% usado</span>
+    </div>
+    <div class="barra"><i class="prev" id="bPrev" style="width:71%"></i><i id="bNova" style="width:0"></i></div>
+    <div class="fat-base"><span>Gastos R$ 1.420</span><span>Teto R$ 2.000</span></div>
 
-  <footer>Hub Digital · @hubdigital.pratico</footer>
+    <div class="pergunta">
+      <h3>Posso comprar?</h3>
+      <p class="dica">Digite quanto custa e escolha as parcelas.</p>
+      <div class="linha-in">
+        <div class="campo"><label for="v">Quanto custa</label><input id="v" inputmode="numeric" placeholder="0" autocomplete="off"></div>
+        <div class="campo"><label for="p">Parcelas</label>
+          <select id="p"><option value="1">À vista</option><option value="2">2x</option><option value="3">3x</option><option value="6">6x</option><option value="10">10x</option></select></div>
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip" data-v="89">R$ 89</button>
+        <button class="chip" data-v="450">R$ 450</button>
+        <button class="chip" data-v="689">R$ 689</button>
+        <button class="chip" data-v="1200">R$ 1.200</button>
+      </div>
+      <div class="veredito vazio" id="ver" aria-live="polite"><div class="t"><b>?</b><span>Digite um valor</span></div></div>
+    </div>
+    <p class="rodape-demo">Exemplo com teto de R$ 2.000. No painel, você coloca o seu.</p>
+  </div>
 </div>
+
+<!-- DOR -->
+<section class="rev">
+  <div class="kick">Você conhece isso</div>
+  <h2>A fatura chega e o dinheiro já foi.</h2>
+  <p class="lead">Parcelinha aqui, compra por impulso ali. Quando você vê, o limite acabou e ninguém sabe para onde foi.</p>
+  <div class="dor">
+    <div><span>😬</span>Passar o cartão sem saber se aquela compra cabe.</div>
+    <div><span>📆</span>Esquecer das parcelas que já estão pesando nas próximas faturas.</div>
+    <div><span>💥</span>Descobrir o estouro só quando a fatura fecha.</div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="rev">
+  <div class="kick">Como funciona</div>
+  <h2>3 passos. 1 minuto para configurar.</h2>
+  <div class="passos">
+    <div class="passo"><h3>Defina o teto da fatura</h3><p>Quanto você quer gastar no máximo e o dia que a fatura fecha. Só isso.</p></div>
+    <div class="passo"><h3>Pergunte antes de comprar</h3><p>Digite o valor, escolha as parcelas e veja se pode, aperta ou estoura.</p></div>
+    <div class="passo"><h3>Lance o gasto em 5 segundos</h3><p>Comprou? Um toque e o painel atualiza quanto ainda dá para gastar.</p></div>
+  </div>
+</section>
+
+<!-- RECURSOS -->
+<section class="rev">
+  <div class="kick">O que você leva</div>
+  <h2>Pequeno, rápido e direto ao ponto.</h2>
+  <div class="grade">
+    <div class="rec grande"><span class="i">🚦</span><h3>Posso comprar?</h3><p>A resposta antes de passar o cartão: pode, aperta ou estoura. E se estourar, ele mostra em quantas vezes a compra cabe.</p></div>
+    <div class="rec"><span class="i">💵</span><h3>Quanto dá pra gastar hoje</h3><p>O que sobra dividido pelos dias até fechar.</p></div>
+    <div class="rec"><span class="i">🔮</span><h3>Previsão de estouro</h3><p>No ritmo atual, o dia em que a fatura passa do teto.</p></div>
+    <div class="rec"><span class="i">🧾</span><h3>Parcelas certas</h3><p>Cada parcela cai na fatura correta, automaticamente.</p></div>
+    <div class="rec"><span class="i">🔄</span><h3>Virada automática</h3><p>A fatura vira sozinha no dia do fechamento.</p></div>
+    <div class="rec"><span class="i">🏷️</span><h3>Categorias</h3><p>Veja para onde o dinheiro está indo.</p></div>
+    <div class="rec"><span class="i">📲</span><h3>No celular, sem instalar</h3><p>Abre pelo link, funciona offline e fica na tela inicial.</p></div>
+    <div class="rec"><span class="i">🔒</span><h3>Dados só no seu aparelho</h3><p>Nada de conta ou senha do banco. Backup em 1 toque.</p></div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="rev" id="oferta">
+  <div class="kick">Oferta</div>
+  <h2>Menos que uma compra por impulso.</h2>
+  <div class="oferta">
+    <div class="nome">Painel Anti-Fatura · Hub Digital</div>
+    <div class="preco" id="preco2">R$ 19,90</div>
+    <div class="ps">pagamento único · acesso vitalício · sem mensalidade</div>
+    <ul class="inclui">
+      <li>Painel completo: pode / aperta / estoura</li>
+      <li>Parcelas, categorias e previsão de estouro</li>
+      <li>Funciona no celular e offline</li>
+      <li>Link de acesso enviado no seu e-mail</li>
+    </ul>
+    <a class="btn" data-checkout href="#">Quero meu painel agora<small>Pix, cartão ou boleto</small></a>
+    <div class="garantia"><span>🛡️</span><div>Garantia de 7 dias pela plataforma de pagamento. Se não gostar, você pede o reembolso.</div></div>
+  </div>
+  <p class="comparar">Uma só compra que o painel te fizer <b>não fazer</b> já paga ele várias vezes.</p>
+</section>
+
+<!-- FAQ -->
+<section class="rev">
+  <div class="kick">Dúvidas</div>
+  <h2>Perguntas rápidas</h2>
+  <details><summary>Como eu recebo?</summary><p>Logo depois do pagamento aprovado, o painel abre na hora e o link de acesso também chega no seu e-mail. É só guardar.</p></details>
+  <details><summary>Funciona no iPhone e no Android?</summary><p>Funciona nos dois, e também no computador. Abre pelo navegador, sem baixar nada. Se quiser, adicione à tela inicial para abrir como um app.</p></details>
+  <details><summary>Ele se conecta ao meu banco?</summary><p>Não, e isso é de propósito: você não passa senha nem dado do banco para ninguém. Você lança os gastos em 5 segundos e tudo fica só no seu aparelho.</p></details>
+  <details><summary>É mensalidade?</summary><p>Não. É um pagamento único de <span class="pr"></span>. Sem renovação.</p></details>
+  <details><summary>Se eu trocar de celular, perco meus dados?</summary><p>Não, se você usar o backup. Dentro do painel tem exportar e importar, em um toque.</p></details>
+  <details><summary>Tem alerta no celular?</summary><p>Os avisos aparecem dentro do painel, quando você abre. Ele não envia notificação push.</p></details>
+  <div class="breve"><b>Em breve: Central de Foco &amp; Produtividade</b>Organize a semana inteira numa tela só. Siga o Instagram para saber primeiro.</div>
+</section>
+
+<footer>
+  <div><a href="#" id="ig">Instagram · @hubdigital.pratico</a></div>
+  <div style="margin-top:8px"><a href="#" id="em"></a></div>
+  <div style="margin-top:18px">Hub Digital · Soluções práticas e ferramentas 1-click</div>
+</footer>
+</div>
+
+<div class="fixa" id="fixa"><a data-checkout href="#">Quero meu painel <span class="pr"></span></a></div>
 
 <script>
 (function(){
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const lista = document.getElementById('lista');
+  // links e preço
+  document.querySelectorAll('[data-checkout]').forEach(a=>{a.href=CHECKOUT;a.target="_blank";a.rel="noopener"});
+  document.querySelectorAll('.pr').forEach(e=>e.textContent=PRECO);
+  document.getElementById('preco2').textContent=PRECO;
+  document.getElementById('ig').href=INSTAGRAM;
+  const em=document.getElementById('em');em.textContent=EMAIL;em.href="mailto:"+EMAIL;
 
-  PRODUTOS.forEach(p => {
-    const disponivel = p.status === 'disponivel' && p.link && p.link !== '#';
-    const emBreve = p.status === 'breve';
-
-    const corpo =
-      '<h2>' + esc(p.nome) + '</h2>' +
-      '<p>' + esc(p.linha) + '</p>' +
-      '<div class="rodape">' +
-        (emBreve
-          ? '<span class="selo">em breve</span>'
-          : (p.preco ? '<span class="preco">' + esc(p.preco) + '</span>' : '') +
-            '<span class="acao">Ver detalhes</span>') +
-      '</div>';
-
-    if (disponivel){
-      const a = document.createElement('a');
-      a.className = 'card';
-      a.href = p.link; a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = corpo;
-      lista.appendChild(a);
-    } else {
-      const d = document.createElement('div');
-      d.className = 'card' + (emBreve ? ' breve' : '');
-      d.innerHTML = corpo;
-      lista.appendChild(d);
+  // demo
+  const TETO=2000,GASTO=1420,DISP=TETO-GASTO;
+  const brl=n=>"R$ "+n.toLocaleString("pt-BR",{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+  const v=document.getElementById('v'),p=document.getElementById('p'),ver=document.getElementById('ver');
+  const bN=document.getElementById('bNova'),bP=document.getElementById('bPrev'),disp=document.getElementById('disp'),uso=document.getElementById('uso');
+  const base=GASTO/TETO*100;
+  function calc(){
+    const val=parseFloat((v.value||"").replace(/\./g,"").replace(",","."))||0;
+    const n=+p.value, parc=val/n;
+    if(!val){
+      ver.className="veredito vazio";ver.innerHTML='<div class="t"><b>?</b><span>Digite um valor</span></div>';
+      bN.style.width="0";bN.style.background="";disp.style.color="";bP.style.width=base+"%";disp.textContent=brl(DISP);uso.textContent=Math.round(base)+"% usado";return;
     }
+    const apos=GASTO+parc, pct=apos/TETO*100, sobra=TETO-apos;
+    const larg=Math.min(parc/TETO*100,100-base);
+    bP.style.width=base+"%";
+    bN.style.left=base+"%";bN.style.width=Math.max(larg,1.5)+"%";
+    let cls,ico,tit,msg,cor;
+    if(apos>TETO){cls="estoura";ico="✕";tit="Estoura a fatura";cor="#ff4d4d";
+      const falta=apos-TETO;
+      let sug="";for(const k of [2,3,4,6,10,12]){if(k>n&&GASTO+val/k<=TETO){sug=" Em "+k+"x ela cabe: "+brl(Math.round(val/k*100)/100)+" por fatura.";break}}
+      msg="Passa do teto em "+brl(Math.round(falta*100)/100)+"."+(sug||" Melhor esperar a próxima fatura.");}
+    else if(pct>85){cls="aperta";ico="!";tit="Cabe, mas aperta";cor="#ffb020";
+      msg="Sobram só "+brl(Math.round(sobra*100)/100)+" na fatura. Dá pra comprar, mas o resto do mês fica curto.";}
+    else{cls="pode";ico="✓";tit="Pode comprar";cor="#00FF66";
+      msg="Depois dessa compra ainda sobram "+brl(Math.round(sobra*100)/100)+" na fatura."+(n>1?" Parcela de "+brl(Math.round(parc*100)/100)+".":"");}
+    ver.className="veredito "+cls;
+    ver.innerHTML='<div class="t"><b>'+ico+'</b><span>'+tit+'</span></div><p>'+msg+'</p>';
+    bN.style.background=cor;
+    disp.textContent=sobra<0?"-"+brl(Math.round(-sobra)):brl(Math.round(sobra));
+    disp.style.color=sobra<0?"#ff4d4d":"";
+    uso.textContent=Math.round(pct)+"% usado";
+  }
+  v.addEventListener('input',()=>{v.value=v.value.replace(/[^\d,]/g,"");calc()});
+  p.addEventListener('change',calc);
+  document.getElementById('chips').addEventListener('click',e=>{
+    const b=e.target.closest('.chip');if(!b)return;
+    v.value=b.dataset.v;calc();
   });
 
-  const contato = document.getElementById('contato');
-  const links = [
-    CONTATO.whatsapp  && {t:'Dúvidas e suporte', s:'WhatsApp', h:CONTATO.whatsapp},
-    CONTATO.email     && {t:'Falar por e-mail',  s:CONTATO.email, h:'mailto:'+CONTATO.email},
-    CONTATO.instagram && {t:'Instagram',         s:'@hubdigital.pratico', h:CONTATO.instagram}
-  ].filter(Boolean);
+  // digita 689 sozinho na primeira vez (mostra o "estoura")
+  const reduz=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let mexeu=false;[v,p].forEach(e=>e.addEventListener('focus',()=>mexeu=true));
+  document.getElementById('chips').addEventListener('click',()=>mexeu=true);
+  const demo=document.querySelector('.demo');
+  let rodou=false;
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{
+    if(en.isIntersecting&&!rodou&&!mexeu){rodou=true;
+      if(reduz){v.value="689";calc();return}
+      let s="689",i=0;(function t(){if(mexeu)return;v.value=s.slice(0,++i);calc();if(i<s.length)setTimeout(t,380)})();
+    }})},{threshold:.55});
+  io.observe(demo);
 
-  links.forEach(l => {
-    const a = document.createElement('a');
-    a.className = 'link'; a.href = l.h;
-    if (l.h.startsWith('http')){ a.target='_blank'; a.rel='noopener'; }
-    a.innerHTML = esc(l.t) + '<span>' + esc(l.s) + '</span>';
-    contato.appendChild(a);
-  });
+  // revelar ao rolar + barra fixa
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io2.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.rev').forEach(e=>io2.observe(e));
+  const fixa=document.getElementById('fixa'),oferta=document.getElementById('oferta');
+  function barra(){
+    const y=scrollY,topoDemo=demo.getBoundingClientRect().bottom;
+    const of=oferta.getBoundingClientRect();
+    const naOferta=of.top<innerHeight*0.7&&of.bottom>0;
+    fixa.classList.toggle('on',topoDemo<0&&!naOferta);
+  }
+  addEventListener('scroll',barra,{passive:true});barra();
 })();
 </script>
 </body>
