@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hub Digital — Painel Anti-Fatura</title>
+<meta name="description" content="Painel Anti-Fatura: registre um gasto em 5 segundos e veja quanto ainda pode gastar no cartão antes de estourar o limite.">
+<meta property="og:title" content="Painel Anti-Fatura — Hub Digital">
+<meta property="og:description" content="Saiba quanto ainda pode gastar no cartão antes de estourar o limite.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- ==========================================================
+     EDITE SOMENTE ESTA PARTE (os 4 links abaixo)
+     Troque o # pelo link real. Ex.: https://pay.kiwify.com.br/xxxxx
+     ========================================================== -->
+<script>
+  const LINKS = {
+    checkout:  "#",                                   // link do checkout Kiwify/Kirvano
+    instagram: "https://instagram.com/hubdigital.pratico",
+    whatsapp:  "#",                                   // ex.: https://wa.me/5581999999999
+    gratuito:  "#"                                    // material gratuito (opcional; deixe "#" para esconder)
+  };
+</script>
+
+<style>
+  :root{
+    --preto:#000000;
+    --carvao:#0d0f0e;
+    --linha:#1e2320;
+    --neon:#00FF66;
+    --branco:#FFFFFF;
+    --cinza:#888888;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--preto);
+    color:var(--branco);
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:440px;margin:0 auto;padding:36px 22px 64px}
+
+  /* ---------- marca ---------- */
+  .marca{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:38px}
+  .hd{font-size:58px;font-weight:700;letter-spacing:-.04em;line-height:1}
+  .hd i{font-style:normal;color:var(--neon)}
+  .marca small{font-size:11px;letter-spacing:.42em;color:var(--cinza);padding-left:.42em}
+
+  /* ---------- hero ---------- */
+  h1{font-size:30px;font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-bottom:12px}
+  .sub{color:var(--cinza);font-size:16px;margin-bottom:26px}
+
+  /* ---------- medidor (elemento central) ---------- */
+  .medidor{
+    background:var(--carvao);border:1px solid var(--linha);
+    border-radius:16px;padding:20px;margin-bottom:28px;
+  }
+  .medidor-topo{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .medidor-topo span{font-size:12px;color:var(--cinza)}
+  .valor{font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:var(--neon);letter-spacing:-.02em}
+  .barra{height:10px;background:#191d1b;border-radius:99px;overflow:hidden}
+  .barra div{height:100%;width:0;background:var(--neon);border-radius:99px;transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+  .medidor-base{display:flex;justify-content:space-between;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--cinza)}
+
+  /* ---------- botões ---------- */
+  .btn{
+    display:block;text-align:center;text-decoration:none;
+    border-radius:14px;padding:17px 20px;font-size:16px;font-weight:700;
+    margin-bottom:12px;transition:transform .12s ease,opacity .12s ease;
+  }
+  .btn:active{transform:scale(.985)}
+  .btn-neon{background:var(--neon);color:#00170a}
+  .btn-neon b{display:block;font-size:12px;font-weight:500;opacity:.72;margin-top:2px}
+  .btn-linha{background:transparent;color:var(--branco);border:1px solid var(--linha)}
+  .btn-linha:hover{border-color:var(--neon);color:var(--neon)}
+  .preco{
+    display:flex;justify-content:center;align-items:baseline;gap:9px;
+    margin:0 0 14px;font-family:'IBM Plex Mono',monospace;
+  }
+  .preco b{font-size:26px;color:var(--branco);font-weight:600}
+  .preco span{font-size:13px;color:var(--cinza)}
+
+  /* ---------- itens ---------- */
+  .lista{margin:34px 0 30px;border-top:1px solid var(--linha)}
+  .item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--linha)}
+  .item .ico{color:var(--neon);flex:0 0 18px;margin-top:3px}
+  .item h3{font-size:15px;font-weight:700;margin-bottom:2px}
+  .item p{font-size:14px;color:var(--cinza)}
+
+  /* ---------- rodapé ---------- */
+  .seguranca{font-size:12px;color:var(--cinza);text-align:center;margin-top:4px}
+  footer{margin-top:40px;text-align:center;font-size:12px;color:#4a4f4c}
+  footer a{color:var(--cinza);text-decoration:none}
+
+  @media (prefers-reduced-motion:reduce){
+    .barra div{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="marca">
+    <div class="hd">H<i>D</i></div>
+    <small>HUB DIGITAL</small>
+  </div>
+
+  <h1>Antes de passar o cartão, pergunte ao painel.</h1>
+  <p class="sub">O Painel Anti-Fatura diz se você pode comprar, quanto ainda dá pra gastar hoje e quando a fatura estoura.</p>
+
+  <div class="medidor">
+    <div class="medidor-topo">
+      <div>
+        <span>Ainda disponível nesta fatura</span>
+        <div class="valor" id="valor">R$ 0</div>
+      </div>
+      <span id="pct">0%</span>
+    </div>
+    <div class="barra"><div id="preenche"></div></div>
+    <div class="medidor-base"><span>R$ 1.420 gastos</span><span>teto R$ 2.000</span></div>
+  </div>
+
+  <div class="preco"><b>R$ 9,99</b><span>pagamento único</span></div>
+  <a class="btn btn-neon" id="cta" href="#">Quero meu painel agora<b>Link de acesso no seu e-mail em segundos</b></a>
+  <p class="seguranca">Pagamento seguro · Pix, cartão ou boleto</p>
+
+  <div class="lista">
+    <div class="item">
+      <div class="ico">→</div>
+      <div><h3>Posso comprar?</h3><p>Digite o valor antes de passar o cartão. O painel responde se pode, se aperta ou se estoura a fatura.</p></div>
+    </div>
+    <div class="item">
+      <div class="ico">→</div>
+      <div><h3>Quanto dá pra gastar hoje</h3><p>O painel divide o que sobra pelos dias até a fatura fechar e mostra o valor do dia.</p></div>
+    </div>
+    <div class="item">
+      <div class="ico">→</div>
+      <div><h3>Previsão de estouro</h3><p>No ritmo atual, ele mostra em que dia a fatura passa do seu teto, antes de acontecer.</p></div>
+    </div>
+    <div class="item">
+      <div class="ico">→</div>
+      <div><h3>Parcelas e virada de fatura</h3><p>Parcelado entra nas faturas certas. A fatura vira sozinha no dia do fechamento.</p></div>
+    </div>
+    <div class="item">
+      <div class="ico">→</div>
+      <div><h3>Funciona no celular, sem instalar</h3><p>Abre pelo link, funciona offline e fica na tela inicial. Seus dados ficam só no seu aparelho, com backup em um toque.</p></div>
+    </div>
+  </div>
+
+  <a class="btn btn-linha" id="gratuito" href="#" style="display:none">Baixar o material gratuito</a>
+  <a class="btn btn-linha" id="instagram" href="#">Ver o Instagram · @hubdigital.pratico</a>
+  <a class="btn btn-linha" id="whatsapp" href="#" style="display:none">Falar no WhatsApp</a>
+
+  <footer>Hub Digital · Soluções práticas e ferramentas 1-click</footer>
+</div>
+
+<script>
+  // aplica os links definidos no topo do arquivo
+  (function(){
+    const map = {cta:"checkout", instagram:"instagram", whatsapp:"whatsapp", gratuito:"gratuito"};
+    for (const id in map){
+      const el = document.getElementById(id);
+      const url = LINKS[map[id]];
+      if (!el) continue;
+      if (url && url !== "#"){
+        el.href = url;
+        el.target = "_blank";
+        el.rel = "noopener";
+        el.style.display = "block";
+      } else if (id === "whatsapp" || id === "gratuito"){
+        el.style.display = "none";
+      }
+    }
+  })();
+
+  // animação única do medidor, ao carregar
+  (function(){
+    const limite = 2000, gasto = 1420, restante = limite - gasto;
+    const pct = Math.round(gasto / limite * 100);
+    const reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const elValor = document.getElementById("valor");
+    const elPct = document.getElementById("pct");
+
+    setTimeout(()=>{ document.getElementById("preenche").style.width = pct + "%"; }, 260);
+
+    if (reduz){
+      elValor.textContent = "R$ " + restante.toLocaleString("pt-BR");
+      elPct.textContent = pct + "% da fatura";
+      return;
+    }
+    let inicio = null;
+    const dur = 1400;
+    function passo(t){
+      if (!inicio) inicio = t;
+      const p = Math.min((t - inicio) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      elValor.textContent = "R$ " + Math.round(restante * e).toLocaleString("pt-BR");
+      elPct.textContent = Math.round(pct * e) + "% da fatura";
+      if (p < 1) requestAnimationFrame(passo);
+    }
+    setTimeout(()=>requestAnimationFrame(passo), 260);
+  })();
+</script>
+</body>
+</html>
