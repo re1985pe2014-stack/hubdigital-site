@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hub Digital | Soluções práticas</title>
+<meta name="description" content="Ferramentas plug & play para sua rotina e suas finanças.">
+<meta property="og:title" content="Hub Digital | Soluções práticas">
+<meta property="og:description" content="Ferramentas plug & play para sua rotina e suas finanças.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<script>
+/* ============================================================
+   EDITE SÓ ESTE BLOCO.
+
+   Para adicionar um produto novo depois, copie um trecho entre
+   { } , cole abaixo e troque os textos. Nada mais muda — o link
+   da sua bio no Instagram continua o mesmo pra sempre.
+
+   status: "disponivel" | "breve"
+   ============================================================ */
+
+const PRODUTOS = [
+  {
+    nome: "Painel Anti-Fatura",
+    linha: "Pergunte ao painel antes de passar o cartão. Teto por fatura, parcelas e previsão de estouro.",
+    preco: "R$ 9,99",
+    link: "https://pay.kiwify.com.br/cpTGLCZ",
+    status: "disponivel"
+  },
+  {
+    nome: "Central de Foco & Produtividade",
+    linha: "Organize a semana inteira numa tela só.",
+    preco: "",
+    link: "",
+    status: "breve"
+  }
+];
+
+const CONTATO = {
+  whatsapp: "",                                   // ex.: https://wa.me/5581999999999
+  email: "contato.hubdigital@gmail.com",
+  instagram: "https://instagram.com/hubdigital.pratico"
+};
+</script>
+
+<style>
+  :root{
+    --preto:#000;
+    --carvao:#0d0f0e;
+    --linha:#1d2220;
+    --neon:#00FF66;
+    --branco:#fff;
+    --cinza:#888;
+    --apagado:#4d524f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--preto);color:var(--branco);
+    font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:430px;margin:0 auto;padding:46px 22px 56px}
+
+  /* marca */
+  .marca{text-align:center;margin-bottom:34px}
+  .hd{font-size:54px;font-weight:700;letter-spacing:-.045em;line-height:1}
+  .hd i{font-style:normal;color:var(--neon)}
+  .marca .nome{font-size:11px;letter-spacing:.42em;color:var(--cinza);padding-left:.42em;margin-top:7px}
+  .marca .tag{font-size:15px;color:var(--cinza);margin-top:16px}
+
+  /* seção */
+  .titulo{
+    font-size:13px;color:var(--apagado);margin:0 0 12px 2px;
+  }
+
+  /* cartões de produto */
+  a.card,div.card{
+    display:block;text-decoration:none;color:inherit;
+    background:var(--carvao);border:1px solid var(--linha);
+    border-radius:16px;padding:18px 20px;margin-bottom:12px;
+    transition:border-color .15s ease,transform .12s ease;
+  }
+  a.card:hover,a.card:focus-visible{border-color:var(--neon)}
+  a.card:active{transform:scale(.99)}
+  a.card:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
+  .card h2{font-size:17px;font-weight:700;letter-spacing:-.01em}
+  .card p{font-size:14px;color:var(--cinza);margin-top:3px}
+  .card .rodape{display:flex;align-items:center;gap:10px;margin-top:14px}
+  .preco{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--neon)}
+  .acao{margin-left:auto;font-size:13px;font-weight:700;color:var(--neon)}
+
+  .card.breve{border-style:dashed;background:transparent}
+  .card.breve h2{color:var(--apagado)}
+  .card.breve p{color:var(--apagado)}
+  .selo{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:var(--apagado);border:1px solid var(--linha);
+    border-radius:99px;padding:3px 10px;
+  }
+
+  /* contato */
+  .contato{margin-top:32px;border-top:1px solid var(--linha);padding-top:22px}
+  a.link{
+    display:flex;align-items:center;justify-content:space-between;
+    text-decoration:none;color:var(--cinza);font-size:15px;
+    padding:13px 2px;border-bottom:1px solid var(--linha);
+  }
+  a.link:hover,a.link:focus-visible{color:var(--neon)}
+  a.link span{color:var(--apagado);font-size:13px}
+
+  footer{margin-top:34px;text-align:center;font-size:12px;color:var(--apagado)}
+
+  @media (max-width:360px){ .wrap{padding:36px 16px 46px} .hd{font-size:46px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="marca">
+    <div class="hd">H<i>D</i></div>
+    <div class="nome">HUB DIGITAL</div>
+    <p class="tag">Ferramentas plug &amp; play para sua rotina e suas finanças.</p>
+  </header>
+
+  <h1 class="titulo">Soluções</h1>
+  <div id="lista"></div>
+
+  <nav class="contato" id="contato"></nav>
+
+  <footer>Hub Digital · @hubdigital.pratico</footer>
+</div>
+
+<script>
+(function(){
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const lista = document.getElementById('lista');
+
+  PRODUTOS.forEach(p => {
+    const disponivel = p.status === 'disponivel' && p.link && p.link !== '#';
+    const emBreve = p.status === 'breve';
+
+    const corpo =
+      '<h2>' + esc(p.nome) + '</h2>' +
+      '<p>' + esc(p.linha) + '</p>' +
+      '<div class="rodape">' +
+        (emBreve
+          ? '<span class="selo">em breve</span>'
+          : (p.preco ? '<span class="preco">' + esc(p.preco) + '</span>' : '') +
+            '<span class="acao">Ver detalhes</span>') +
+      '</div>';
+
+    if (disponivel){
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = p.link; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = corpo;
+      lista.appendChild(a);
+    } else {
+      const d = document.createElement('div');
+      d.className = 'card' + (emBreve ? ' breve' : '');
+      d.innerHTML = corpo;
+      lista.appendChild(d);
+    }
+  });
+
+  const contato = document.getElementById('contato');
+  const links = [
+    CONTATO.whatsapp  && {t:'Dúvidas e suporte', s:'WhatsApp', h:CONTATO.whatsapp},
+    CONTATO.email     && {t:'Falar por e-mail',  s:CONTATO.email, h:'mailto:'+CONTATO.email},
+    CONTATO.instagram && {t:'Instagram',         s:'@hubdigital.pratico', h:CONTATO.instagram}
+  ].filter(Boolean);
+
+  links.forEach(l => {
+    const a = document.createElement('a');
+    a.className = 'link'; a.href = l.h;
+    if (l.h.startsWith('http')){ a.target='_blank'; a.rel='noopener'; }
+    a.innerHTML = esc(l.t) + '<span>' + esc(l.s) + '</span>';
+    contato.appendChild(a);
+  });
+})();
+</script>
+</body>
+</html>
