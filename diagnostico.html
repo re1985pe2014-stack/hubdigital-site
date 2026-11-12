@@ -1,0 +1,48 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico grátis do seu Instagram | Hub Digital</title>
+<style>
+:root{--c:#F6F1E7;--t:#C4572B;--n:#13233F;--y:#F4C95D}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--c);color:var(--n)}
+.w{max-width:620px;margin:auto;padding:24px 20px 60px}
+h1{font-family:Georgia,serif;font-size:36px;line-height:1.1;margin:10px 0 12px}
+.sub{font-size:18px;line-height:1.5;color:#4a453e}
+.btn{display:block;width:100%;background:var(--y);color:var(--n);font-weight:700;border:0;border-radius:14px;padding:18px;font-size:18px;cursor:pointer;margin-top:14px;text-align:center;text-decoration:none}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #e6dfd0;border-radius:14px;padding:16px;font-size:17px;margin-top:10px;cursor:pointer;color:var(--n)}
+.opt:hover{border-color:var(--t)}
+.bar{height:8px;background:#e6dfd0;border-radius:6px;margin:6px 0 22px}.bar i{display:block;height:100%;background:var(--t);border-radius:6px;width:0}
+.q{font-family:Georgia,serif;font-size:26px;line-height:1.2;margin:0}
+.score{font-family:Georgia,serif;font-size:120px;line-height:1;color:var(--t);margin:6px 0}
+.tip{background:#fff;border-left:8px solid var(--t);border-radius:12px;padding:16px;margin-top:12px;line-height:1.45}
+.tip b{display:block;margin-bottom:4px}.hide{display:none}.small{font-size:13px;color:#8a8379;margin-top:20px}
+</style></head><body><div class="w">
+<div id="s0"><div style="font-size:13px;letter-spacing:3px;font-weight:700;color:var(--t)">HUB DIGITAL · GRÁTIS · 2 MINUTOS</div>
+<h1>Qual a nota do seu Instagram para vender?</h1>
+<p class="sub">Responda 8 perguntas e descubra o que mais está travando o seu perfil, com o que fazer primeiro. Sem cadastro.</p>
+<button class="btn" onclick="go()">Fazer meu diagnóstico</button></div>
+<div id="s1" class="hide"><div class="bar"><i id="b"></i></div><p class="q" id="q"></p><div id="o"></div></div>
+<div id="s2" class="hide"><div style="font-size:13px;letter-spacing:3px;font-weight:700;color:var(--t)">SEU RESULTADO</div>
+<div class="score" id="sc"></div><div id="lv" style="font-size:22px;font-weight:700"></div><div id="tips"></div>
+<a class="btn" href="https://www.instagram.com/hubdigital.solucoes/" target="_blank">Tire print e poste nos stories marcando @hubdigital.solucoes</a>
+<a class="btn" style="background:var(--t);color:#fff" href="https://pay.kiwify.com.br/7XCXKO4" target="_blank">Quero os 10 prompts para melhorar isso</a>
+<p class="small">Diagnóstico de orientação, baseado nas suas próprias respostas. Não garante resultados.</p></div>
+</div><script>
+const Q=[
+["Seu perfil tem um nicho claro (dá para entender em 3 segundos o que você faz)?","bio","Deixe a bio clara","Escreva em uma frase: quem você ajuda + o resultado. Ex.: 'Ajudo X a conseguir Y'."],
+["Você tem link na bio levando a um lugar onde a pessoa pode comprar ou falar com você?","link","Coloque um destino na bio","Sem link, quem se interessa não tem para onde ir. Use uma página simples ou o WhatsApp."],
+["Quantas vezes posta por semana?","freq","Crie uma rotina mínima","3 posts por semana, sempre nos mesmos dias, vale mais que 10 posts em um dia e depois sumir."],
+["Você usa Reels?","reels","Teste Reels","Reels costumam alcançar quem ainda não te segue. Comece com 1 por semana, curto e direto."],
+["Seus posts terminam com uma chamada para ação (comente, salve, chame no direct)?","cta","Peça uma ação","Todo post precisa dizer o próximo passo. Sem isso, a pessoa vê e vai embora."],
+["Você responde comentários e mensagens?","resp","Responda rápido","Responder nas primeiras horas aumenta a conversa e mostra ao Instagram que o post interessa."],
+["Você tem um produto ou serviço claro para oferecer?","oferta","Defina uma oferta","Escolha UMA coisa para vender e fale dela. Quem oferece tudo não vende nada."],
+["Você mostra bastidores, resultados reais ou provas do que faz?","prova","Mostre provas reais","Prints, antes e depois e números verdadeiros geram mais confiança que promessas."]];
+const A=[["Sim, bem claro","Mais ou menos","Não"],["Sim","Tenho, mas não leva a nada","Não tenho"],["4 ou mais","1 a 3","Quase nunca"],["Toda semana","Às vezes","Nunca"],["Quase sempre","Às vezes","Nunca"],["Sempre","Às vezes","Quase nunca"],["Sim, uma só","Várias, confuso","Ainda não"],["Sempre","Raramente","Nunca"]];
+let i=0,pts=[],$=id=>document.getElementById(id);
+function go(){$('s0').classList.add('hide');$('s1').classList.remove('hide');show()}
+function show(){$('q').textContent=Q[i][0];$('b').style.width=(i/8*100)+'%';$('o').innerHTML=A[i].map((t,k)=>`<button class="opt" onclick="pick(${k})">${t}</button>`).join('')}
+function pick(k){pts.push([12.5,6,0][k]);i++;if(i<8)show();else end()}
+function end(){$('s1').classList.add('hide');$('s2').classList.remove('hide');
+const s=Math.round(pts.reduce((a,b)=>a+b,0));$('sc').textContent=s;
+$('lv').textContent=s>=80?'Perfil forte: falta só ajustar':s>=50?'Perfil com potencial: tem pontos travando':'Perfil no começo: ótimo, dá para melhorar muito';
+const w=pts.map((p,k)=>[p,k]).sort((a,b)=>a[0]-b[0]).slice(0,3).filter(x=>x[0]<12.5);
+$('tips').innerHTML=(w.length?w:[[0,0]]).map(x=>`<div class="tip"><b>${Q[x[1]][2]}</b>${w.length?Q[x[1]][3]:'Continue assim e foque em constância.'}</div>`).join('')}
+</script></body></html>
