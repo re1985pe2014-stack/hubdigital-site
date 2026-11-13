@@ -1,0 +1,32 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gerador de catálogo | Hub Digital</title>
+<style>:root{--c:#F6F1E7;--t:#C4572B;--n:#13233F;--y:#F4C95D}*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--c);color:var(--n)}.w{max-width:640px;margin:auto;padding:22px 16px 60px}
+h1{font-family:Georgia,serif;font-size:32px;margin:6px 0 6px;line-height:1.1}.sub{color:#4a453e;margin:0 0 18px}label{display:block;font-weight:700;margin:14px 0 4px;font-size:14px}
+input,textarea{width:100%;padding:12px;border:2px solid #e6dfd0;border-radius:12px;font-size:16px;background:#fff;color:var(--n);font-family:inherit}
+.it{background:#fff;border-radius:16px;padding:14px;margin-top:12px;border-left:8px solid var(--t)}.it input{margin-bottom:8px}.row{display:flex;gap:8px}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;margin-top:14px;background:var(--y);color:var(--n);text-align:center;text-decoration:none}.btn.s{background:#fff;border:2px solid var(--n)}
+.cols{display:flex;gap:10px;margin-top:6px}.cols button{width:44px;height:44px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #e6dfd0;cursor:pointer}.cols button.on{box-shadow:0 0 0 3px var(--n)}
+#out{display:none;background:var(--n);color:#fff;border-radius:16px;padding:16px;margin-top:18px;word-break:break-all;font-size:13px}#out b{color:var(--y);font-size:15px;display:block;margin-bottom:6px}</style></head><body><div class="w">
+<div style="font-size:13px;letter-spacing:3px;font-weight:700;color:var(--t)">HUB DIGITAL</div><h1>Gerador de catálogo digital</h1>
+<p class="sub">Preencha os dados do negócio e gere um link com os produtos e botão de WhatsApp.</p>
+<label>Nome do negócio</label><input id="nome" placeholder="Ex.: Doce Alegria">
+<label>Frase curta</label><input id="desc" placeholder="Ex.: Bolos no pote feitos na hora">
+<label>WhatsApp (com DDD)</label><input id="wa" inputmode="tel" placeholder="81999999999">
+<label>Cor principal</label><div class="cols" id="cols"></div>
+<label>Produtos</label><div id="its"></div>
+<button class="btn s" onclick="add()">+ Adicionar produto</button>
+<button class="btn" onclick="gen()">Gerar meu catálogo</button>
+<div id="out"><b>Seu link:</b><span id="lk"></span><a class="btn" id="op" target="_blank" style="margin-top:12px">Abrir catálogo</a><button class="btn s" onclick="cp()">Copiar link</button></div>
+<p style="font-size:12px;color:#8a8379;margin-top:18px">Foto do produto é opcional: cole o endereço (https://) de uma imagem. Os dados ficam dentro do link e não são enviados a nenhum servidor.</p></div>
+<script>
+const C=['#C4572B','#13233F','#2E7D5B','#B83280','#1F6FB2'];let cor=C[0];
+cols.innerHTML=C.map((c,i)=>`<button style="background:${c}" class="${i?'':'on'}" onclick="pick(this,'${c}')"></button>`).join('');
+function pick(b,c){cor=c;[...cols.children].forEach(x=>x.classList.remove('on'));b.classList.add('on')}
+function add(v={}){const d=document.createElement('div');d.className='it';d.innerHTML='<input class="a" placeholder="Nome do produto"><div class="row"><input class="p" placeholder="Preço (ex.: R$ 12)"></div><input class="b" placeholder="Descrição curta"><input class="i" placeholder="Endereço da foto (opcional)">';its.appendChild(d)}
+add();add();
+function gen(){const itens=[...its.children].map(e=>({nome:e.querySelector('.a').value.trim(),preco:e.querySelector('.p').value.trim(),desc:e.querySelector('.b').value.trim(),img:e.querySelector('.i').value.trim()})).filter(i=>i.nome);
+if(!nome.value.trim()||!wa.value.replace(/\D/g,'')||!itens.length){alert('Preencha o nome, o WhatsApp e pelo menos 1 produto.');return}
+const d={nome:nome.value.trim(),desc:desc.value.trim(),wa:wa.value,cor,itens};
+const h=encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(d)))));
+const u=new URL('catalogo.html',location.href).href.split('#')[0]+'#'+h;lk.textContent=u;op.href=u;out.style.display='block';out.scrollIntoView({behavior:'smooth'})}
+function cp(){navigator.clipboard.writeText(lk.textContent).then(()=>alert('Link copiado!'))}
+</script></body></html>

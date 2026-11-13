@@ -1,0 +1,26 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Catálogo</title>
+<style>:root{--a:#C4572B;--b:#13233F;--c:#F6F1E7}*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--c);color:#1d1b18}
+header{background:var(--a);color:#fff;padding:44px 20px 40px;text-align:center}h1{font-family:Georgia,serif;margin:0 0 8px;font-size:34px;line-height:1.1}header p{margin:0 auto;max-width:520px;opacity:.92;font-size:17px}
+main{max-width:860px;margin:0 auto;padding:22px 16px 110px;display:grid;gap:14px}@media(min-width:640px){main{grid-template-columns:1fr 1fr}}
+.c{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.06);display:flex;flex-direction:column}.c img{width:100%;height:190px;object-fit:cover;display:block}
+.c div{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}.n{font-weight:700;font-size:19px}.d{color:#4a453e;font-size:15px;line-height:1.4}.p{font-size:22px;font-weight:700;color:var(--a);margin-top:auto}
+.btn{display:block;text-align:center;background:#25D366;color:#073b1a;font-weight:700;text-decoration:none;padding:13px;border-radius:12px;margin-top:6px}
+.fl{position:fixed;left:16px;right:16px;bottom:16px;max-width:520px;margin:auto;box-shadow:0 6px 20px rgba(0,0,0,.25);padding:16px;font-size:17px}
+footer{text-align:center;font-size:12px;color:#8a8379;padding:0 0 90px}.err{padding:60px 20px;text-align:center}</style></head><body>
+<header><h1 id="t"></h1><p id="s"></p></header><main id="m"></main><footer>Catálogo criado com Hub Digital</footer><a id="f" class="btn fl" target="_blank" rel="noopener"></a>
+<script>
+function ok(u){try{const x=new URL(u);return x.protocol==='https:'||x.protocol==='http:'}catch(e){return false}}
+try{
+const d=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(location.hash.slice(1))))));
+const col=/^#[0-9a-f]{6}$/i.test(d.cor)?d.cor:'#C4572B';document.documentElement.style.setProperty('--a',col);
+document.title=d.nome||'Catálogo';t.textContent=d.nome||'';s.textContent=d.desc||'';
+const wa=String(d.wa||'').replace(/\D/g,'');const link=(txt)=>'https://wa.me/'+(wa.startsWith('55')?wa:'55'+wa)+'?text='+encodeURIComponent(txt);
+(d.itens||[]).forEach(i=>{const e=document.createElement('div');e.className='c';
+if(i.img&&ok(i.img)){const im=document.createElement('img');im.src=i.img;im.alt=i.nome||'';im.loading='lazy';e.appendChild(im)}
+const b=document.createElement('div');const n=document.createElement('span');n.className='n';n.textContent=i.nome||'';b.appendChild(n);
+if(i.desc){const q=document.createElement('span');q.className='d';q.textContent=i.desc;b.appendChild(q)}
+if(i.preco){const p=document.createElement('span');p.className='p';p.textContent=i.preco;b.appendChild(p)}
+const a=document.createElement('a');a.className='btn';a.target='_blank';a.rel='noopener';a.textContent='Pedir no WhatsApp';a.href=link('Olá! Quero pedir: '+(i.nome||''));b.appendChild(a);e.appendChild(b);m.appendChild(e)});
+f.textContent='Falar no WhatsApp';f.href=link('Olá! Vi o seu catálogo e quero saber mais.');
+}catch(e){document.body.innerHTML='<div class="err"><h2>Catálogo não encontrado</h2><p>Confira se o link está completo.</p></div>'}
+</script></body></html>
